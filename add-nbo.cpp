@@ -1,19 +1,28 @@
-#include<stdlib.h>
 #include <stdio.h>
-
-void usage() {
-	printf("syntax : add-nbo <file1> <file2>\n");
-	printf("sample : add-nbo a.bin c.bin\n");
-}
+#include <stdint.h>
+#include <arpa/inet.h>
 
 int main(int argc, char *argv[])
 {
-	if (argc != 3) {
-		usage();
-		exit(EXIT_FAILURE);
-	}
-	FILE *fp = fopen(argv[1], "rb");
-	if (fp == nullptr) {
-		fpri
-	}
+	FILE *fp = fopen(argv[1], "r");
+	FILE *fp1 = fopen(argv[2], "r");
+
+	uint32_t a,b;
+
+	fread(&a,sizeof(a),1,fp);
+	fread(&b,sizeof(b),1,fp1);
+
+	fclose(fp);
+	fclose(fp1);
+
+	a = ntohl(a);
+	b = ntohl(b);
+
+	uint32_t c = a+b;
+	printf("%d(%x) + %d(%x) = %d(%x)", a,a,b,b,c,c);
+
+	
+
+	return 0;
 }
+
